@@ -40,7 +40,8 @@ Step by step instructions of how to install and set up this project.
     - **SourceDirectory** - The folder that contains the source code you wish to upload (Note: All files in the folder will be zipped unless added to the IgnoreFiles list)
     - **FileName** - The name of the resulting zip file that will be uploaded
     - **IgnoreFiles** - Files in the SourceDirectory that you wish to be excluded from the zip file
-    - **ARN** - The Amazon ARN (Amazon Resource Name) for the lambda function you wish to upload the code to. This can be found in your lambda function and should look similar to *arn:aws:lambda:us-east-1:000000000000:function:SampleFunction*
+    - **ARN** - The Amazon ARN (Amazon Resource Name) for the lambda function you wish to upload the code to. This can be found in your lambda function and should look similar to
+    ```arn:aws:lambda:us-east-1:000000000000:function:SampleFunction```
     - **ProfileName** - The name of the profile in your AWS Credentials file
     - **RegionName** - The region your Lambda function is located
 
