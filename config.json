@@ -1,0 +1,22 @@
+{
+    "Projects": [
+        {
+            "ProjectInfo": {
+                "ProjectName": "SAMPLE PROJECT NAME",
+                "ZipInfo": {
+                    "SourceDirectory": "SAMPLE SOURCE DIRECTORY",
+                    "FileName": "SAMPLE FILENAME",
+                    "IgnoreFiles": [
+                        "SampleFileInSourceDirectory1",
+                        "SampleFileInSourceDirectory1"
+                    ]
+                },
+                "LambdaInfo": {
+                    "ARN": "SAMPLE ARN",
+                    "ProfileName": "SAMPLE PROFILE NAME",
+                    "RegionName": "SAMPLE REGION NAME"
+                }
+            }
+        }
+    ]
+}
