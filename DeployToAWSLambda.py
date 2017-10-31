@@ -7,7 +7,7 @@ import boto3
 class ProjectInfo:
 
     def __init__(self, project_name, zip_info, lambda_info):
-        self.ProjetName = project_name
+        self.ProjectName = project_name
         self.ZipInfo = zip_info
         self.LambdaInfo = lambda_info
 
@@ -108,12 +108,12 @@ def flat_zip_files(source_directory, output_zip_filename, output_zip_path, ignor
 
     # Walk the file structure to get the files and zip them into the specified
     # zip directory
-    for root, dirs, files in os.walk(source_directory):
+    for root, _, files in os.walk(source_directory):
         for file in files:
             # Check if the current file is on the ignore list.
             if file not in ignore_list:
-                # Write current file to the zip file in the required flattened format 
-                zfile.write(os.path.join(root, file), file)
+                # Write current file to the zip file in the required flattened format
+                zfile.write(os.path.join(root, file), arcname=file)
 
     # Close the zip connection
     zfile.close()
@@ -132,11 +132,11 @@ def main():
     # Get the config file from the current file's directory
     config_file_path = os.path.join(current_directory, "config.json")
 
-    # Get the project name from the commandline args
+    # Get the project name from the command line args
     try:
         selected_project_name = sys.argv[1]
     except:
-        print("ERROR: A value needs to be provided for the project name argument")
+        raise ValueError("ERROR: A value needs to be provided for the project name argument")
 
     # Parse and consume the config file
     project_info = get_project_info(config_file_path, selected_project_name)
