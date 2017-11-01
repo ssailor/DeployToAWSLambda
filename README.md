@@ -12,44 +12,57 @@ These instructions will get your local machine set up for use of this utility.
 
 ### Installing
 
-Step by step instructions of how to install and set up this project.
+Step by step instructions on how to install and set up this project.
 
 1. Clone this repo to the desired folder on your machine
 2. If you have not already, get AWS access keys from your AWS account and store them as a profile on your machine in the AWS Credentials file. (See the link in Prerequisites for more info )
-3. Update the *config.json* file with an entry in the Projects array in the following object: 
+3. Update the *config.json* file with ProjectInfo object(s) in the Projects array : 
 
 ```
-    {
-        "ProjectInfo": {
-            "ProjectName": "SAMPLE PROJECT NAME",
-            "ZipInfo": {
-                "SourceDirectory": "SAMPLE SOURCE DIRECTORY",
-                "FileName": "SAMPLE FILENAME",
-                "IgnoreFiles": ["File1.txt", "File2.bat"]
-            },
-            "LambdaInfo": {
-                "ARN": "SAMPLE ARN",
-                "ProfileName": "SAMPLE PROFILE NAME",
-                "RegionName": "SAMPLE REGION NAME"
+{
+    "Projects": [
+        {
+            "ProjectInfo": {
+                "ProjectName": "SAMPLE PROJECT NAME",
+                "ZipInfo": {
+                    "SourceDirectory": "SAMPLE SOURCE DIRECTORY",
+                    "FileName": "SAMPLE FILENAME",
+                    "IgnoreFiles": [
+                        "SampleFile1.txt",
+                        "SampleFile2.json"
+                    ]
+                },
+                "LambdaInfo": {
+                    "ARN": "SAMPLE ARN",
+                    "ProfileName": "SAMPLE PROFILE NAME",
+                    "RegionName": "SAMPLE REGION NAME"
+                }
             }
         }
-    }
+    ]
+}
 ```
 4. Replace the values in the JSON ProjectInfo object with the following pieces of information:
     - **ProjectName** - The name of the project, this will be the command line argument you need to provide in the terminal/command line.
     - **SourceDirectory** - The folder that contains the source code you wish to upload (Note: All files in the folder will be zipped unless added to the IgnoreFiles list)
     - **FileName** - The name of the resulting zip file that will be uploaded
-    - **IgnoreFiles** - Files in the source directory that you wish to be excluded from the zip file
+    - **IgnoreFiles** (*Optional*) - Files in the source directory that you wish to be excluded from the zip file
     - **ARN** - The Amazon ARN (Amazon Resource Name) for the lambda function you wish to upload the code to. This can be found in your lambda function and should look similar to
     ```arn:aws:lambda:us-east-1:000000000000:function:SampleFunction```
-    - **ProfileName** - The name of the profile in your AWS Credentials file
-    - **RegionName** - The region your Lambda function is located
+    - **ProfileName** (*Optional*) - The name of the profile in your AWS Credentials file
+    - **RegionName** (*Optional*) - The region your Lambda function is located
 
-5. (*Optional*) Create a bat file or shell script in the folder you store your source code and add it to the IgnoreFiles list in the JSON config file. This will allow you to deploy from a script within the folder you have the code. 
+5. Use the command line to call the python utility and provide the necessary and desired flags
+    - __Command Line Flags__
+        - **-P or --projectname** *ProjectName* *(Required)* - Specifies to the program what project you are working with. This will be the same name as the ones stored in the config file.
+        - **-s or --silent** - If flag is included it will run the program in silent mode and will not provide output to the command line
+        - **-h or --help** - Provides help information about available program flags
+
+6. (*Optional*) Create a bat file or shell script in the folder you store your source code and add it to the IgnoreFiles list in the JSON config file. This will allow you to deploy from a script within the folder you have the code.
 
 ```
 Sample: Deploy.bat
-python "C:/DeployToAWSLambda/DeployToAWSLambda.py" SampleProjectName
+python "C:/DeployToAWSLambda/DeployToAWSLambda.py" -P SampleProjectName
 ```
 
 ## License
